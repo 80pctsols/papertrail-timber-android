@@ -24,6 +24,7 @@ class App : Application() {
             .logger(logger)
             .host(BuildConfig.PAPERTRAIL_HOST)
             .port(BuildConfig.PAPERTRAIL_PORT)
+            .datePattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
             .priority(Log.INFO)
             .build()
 
