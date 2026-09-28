@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "me.jagdeep.papertrailtimber"
-        minSdk = libs.versions.minSdk.get().toInt()
+        minSdk = libs.versions.sampleMinSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
@@ -46,7 +46,6 @@ android {
 
 dependencies {
     testImplementation(libs.junit)
-    implementation(libs.kotlin.stdlib)
     implementation(libs.appcompat)
 
     implementation(project(":papertrail-timber"))

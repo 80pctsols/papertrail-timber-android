@@ -26,7 +26,6 @@ android {
 
 dependencies {
     testImplementation(libs.junit)
-    api(libs.kotlin.stdlib)
     api(libs.timber)
     api(libs.slf4j.api)
     api(libs.logback.android.core)
