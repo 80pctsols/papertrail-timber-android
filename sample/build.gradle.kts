@@ -1,15 +1,15 @@
 plugins {
     id("com.android.application")
-    kotlin("android")
 }
 
 android {
-    compileSdkVersion(Android.targetSdk)
+    namespace = "me.jagdeep.papertrailtimber"
+    compileSdk = Android.compileSdk
 
     defaultConfig {
         applicationId = "me.jagdeep.papertrailtimber"
-        minSdkVersion(Android.minSdk)
-        targetSdkVersion(Android.targetSdk)
+        minSdk = Android.minSdk
+        targetSdk = Android.targetSdk
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -18,22 +18,28 @@ android {
         buildConfigField("int", "PAPERTRAIL_PORT", "30123")
     }
 
-    android {
-        lintOptions {
-            isAbortOnError = false
-        }
+    buildFeatures {
+        buildConfig = true
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    lint {
+        abortOnError = false
     }
 
     buildTypes {
         getByName("debug") {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         getByName("release") {
-            isZipAlignEnabled = true
             isShrinkResources = true
             isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
 }

@@ -1,30 +1,26 @@
 plugins {
     id("com.android.library")
-    kotlin("android")
-    id("com.github.dcendents.android-maven")
 }
 
 group = "com.github.jdsingh"
 
 android {
-    compileSdkVersion(Android.targetSdk)
+    namespace = "me.jagdeep.papertrail.timber"
+    compileSdk = Android.compileSdk
 
     defaultConfig {
-        minSdkVersion(Android.minSdk)
-        targetSdkVersion(Android.targetSdk)
+        minSdk = Android.minSdk
         consumerProguardFile("consumer-proguard-rules.pro")
     }
 
-    // TODO replace with https://issuetracker.google.com/issues/72050365 once released.
-    libraryVariants.all {
-        generateBuildConfig?.enabled = false
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
-    lintOptions {
-        isAbortOnError = true
-        htmlReport = true
-        setHtmlOutput(file("${project.buildDir}/reports/lint/lint.html"))
-        setLintConfig(file("lint.xml"))
+    lint {
+        abortOnError = true
+        lintConfig = file("lint.xml")
     }
 }
 
