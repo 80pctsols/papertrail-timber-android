@@ -14,5 +14,9 @@ dependencyResolutionManagement {
     }
 }
 
-include(":sample")
+rootProject.name = "papertrail-timber-android"
+
 include(":papertrail-timber")
+if (gradle.parent == null) {
+    include(":sample")
+}
