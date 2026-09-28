@@ -1,4 +1,12 @@
 
+1.1.0 / 2026-09-28
+==================
+
+  * feat: configurable syslog date pattern via `PapertrailTree.Builder.datePattern()`
+  * chore: Gradle 9.8.0, AGP 9.4.1, Kotlin 2.4.20, version catalog instead of buildSrc
+  * chore: compileSdk and targetSdk 36, minSdk 21
+  * chore: sample module is skipped when included as a composite build
+
 1.0.3 / 2019-10-19
 ==================
 
