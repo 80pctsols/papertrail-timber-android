@@ -9,7 +9,7 @@ compileSdk = "36"
 
 junit = "4.13.2"
 appcompat = "1.8.0"
-timber = "4.7.1"
+timber = "5.0.1"
 slf4j = "1.7.29"
 logbackAndroid = "1.1.1-6"
 logbackSyslog4j = "1.0.0"
