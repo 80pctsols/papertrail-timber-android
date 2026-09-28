@@ -12,7 +12,13 @@ import org.slf4j.LoggerFactory
 /**
  * Configure Papertrail with Android logback.
  */
-internal class Configuration(system: String, program: String, host: String, port: Int) {
+internal class Configuration(
+    system: String,
+    program: String,
+    host: String,
+    port: Int,
+    datePattern: String
+) {
 
     init {
         // Reset the default context (which may already have been initialized)
@@ -31,7 +37,7 @@ internal class Configuration(system: String, program: String, host: String, port
 
         val patternLayout = PatternLayout().apply {
             context = loggerContext
-            pattern = "%d{MMM dd HH:mm:ss} $system $program: %logger{35} %-5level %m%n"
+            pattern = "%d{$datePattern} $system $program: %logger{35} %-5level %m%n"
             start()
         }
 

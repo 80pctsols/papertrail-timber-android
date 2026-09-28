@@ -10,7 +10,9 @@ import timber.log.Timber
  * Timber Tree for sending logs to PaperTrail.
  *
  * It will send logs to papertrail with format:
- * {MMM dd HH:mm:ss} {system} {program}: {logger} {level} {message}
+ * {date} {system} {program}: {logger} {level} {message}
+ *
+ * {date} uses [Builder.datePattern], default is "MMM dd HH:mm:ss"
  */
 class PapertrailTree private constructor(
     system: String,
@@ -18,13 +20,14 @@ class PapertrailTree private constructor(
     logger: String,
     host: String,
     port: Int,
+    datePattern: String,
     private val logPriority: Int
 ) : Timber.DebugTree() {
 
     private val log: Logger = LoggerFactory.getLogger(logger)
 
     init {
-        Configuration(system, program, host, port)
+        Configuration(system, program, host, port, datePattern)
     }
 
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
@@ -48,6 +51,7 @@ class PapertrailTree private constructor(
         private lateinit var _logger: String
         private lateinit var _host: String
         private var _port: Int = 0
+        private var _datePattern: String = "MMM dd HH:mm:ss"
         private var _priority: Int = Log.DEBUG
 
         /** System name for Papertrail logs. */
@@ -81,6 +85,16 @@ class PapertrailTree private constructor(
         }
 
         /**
+         * Date pattern (java.text.SimpleDateFormat) for the syslog timestamp.
+         *
+         * Default is "MMM dd HH:mm:ss"
+         */
+        fun datePattern(datePattern: String): Builder {
+            _datePattern = datePattern
+            return this
+        }
+
+        /**
          * Priority level filter. Logs with priority level of equal or higher will be
          * sent to papertrail.
          *
@@ -107,7 +121,7 @@ class PapertrailTree private constructor(
             require(_port != 0) { "port is required" }
 
             return PapertrailTree(
-                _system, _program, _logger, _host, _port, _priority
+                _system, _program, _logger, _host, _port, _datePattern, _priority
             )
         }
     }
