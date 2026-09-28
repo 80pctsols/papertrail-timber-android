@@ -1,15 +1,15 @@
 plugins {
-    id("com.android.application")
+    alias(libs.plugins.android.application)
 }
 
 android {
     namespace = "me.jagdeep.papertrailtimber"
-    compileSdk = Android.compileSdk
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "me.jagdeep.papertrailtimber"
-        minSdk = Android.minSdk
-        targetSdk = Android.targetSdk
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -45,9 +45,9 @@ android {
 }
 
 dependencies {
-    testImplementation(Libraries.junit)
-    implementation(Libraries.kotlin)
-    implementation(Libraries.appCompact)
+    testImplementation(libs.junit)
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.appcompat)
 
     implementation(project(":papertrail-timber"))
 }

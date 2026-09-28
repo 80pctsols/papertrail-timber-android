@@ -1,15 +1,15 @@
 plugins {
-    id("com.android.library")
+    alias(libs.plugins.android.library)
 }
 
 group = "com.github.jdsingh"
 
 android {
     namespace = "me.jagdeep.papertrail.timber"
-    compileSdk = Android.compileSdk
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = Android.minSdk
+        minSdk = libs.versions.minSdk.get().toInt()
         consumerProguardFile("consumer-proguard-rules.pro")
     }
 
@@ -25,15 +25,15 @@ android {
 }
 
 dependencies {
-    testImplementation(Libraries.junit)
-    api(Libraries.kotlin)
-    api(Libraries.timber)
-    api(Libraries.slf4j)
-    api(Libraries.logbackAndroidCore)
-    api(Libraries.logbackAndroidClassic) {
+    testImplementation(libs.junit)
+    api(libs.kotlin.stdlib)
+    api(libs.timber)
+    api(libs.slf4j.api)
+    api(libs.logback.android.core)
+    api(libs.logback.android.classic) {
         exclude("com.google.android", "android")
     }
-    api(Libraries.logbackSyslog4j) {
+    api(libs.logback.syslog4j) {
         exclude("ch.qos.logback")
     }
 }
